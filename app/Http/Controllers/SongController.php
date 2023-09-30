@@ -20,7 +20,7 @@ class SongController extends Controller
      */
     public function create()
     {
-        //
+        return view('form');
     }
 
     /**
@@ -28,7 +28,35 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255',
+            'artist' => 'required|max:255',
+            'release_date' => 'required',
+            'audio' => 'required|mimes:mp3',
+            'thumbnail' => 'mimes:jpg,png,jpeg',
+            'tags' => 'max:255'
+        ]);
+
+        $audioPath = $request->audio->getClientOriginalName();
+        $request->audio->storeAs('public/songs', $audioPath);
+
+        $thumbnailPath = null;
+        if ($request->thumbnail) {
+            $thumbnailPath = $request->thumbnail->getClientOriginalName();
+            $request->thumbnail->storeAs('public/thumbnails', $thumbnailPath);
+        }
+
+        Song::create([
+            'title' => $request->title,
+            'artist' => $request->artist,
+            'release_date' => $request->release_date,
+            'file_audio_path' => $audioPath,
+            'thumbnail_path' => $thumbnailPath,
+            'tags' => $request->tags
+        ]);
+
+        return redirect('/form');
+
     }
 
     /**
