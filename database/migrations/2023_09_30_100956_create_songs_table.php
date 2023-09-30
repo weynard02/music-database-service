@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('artist');
             $table->date('release_date');
             $table->string('file_audio_path');
+            $table->string('thumbnail_path');
+            $table->string('tags');
             $table->timestamps();
         });
     }

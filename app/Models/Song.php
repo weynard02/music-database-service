@@ -12,5 +12,5 @@ class Song extends Model
     protected $table = 'songs';
     protected $primaryKey = 'id';
 
-    protected $fillable = ['title', 'artist', 'release_date','file_audio_path'];
+    protected $fillable = ['title', 'artist', 'release_date','file_audio_path', 'thumbnail_path', 'tags'];
 }
