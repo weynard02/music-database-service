@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Onest:wght@100;300;400;500;700&display=swap");
+
+:root {
+    --bg: #27005d;
+    --primary: #e4f1ff;
+    --secondary: #aed2ff;
+    --tri: #9400ff;
+}
+body {
+    font-family: "Onest", sans-serif;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 10px;
+    -ms-transform: translate(-50%, 50%);
+    transform: translate(-50%, -50%);
+    background-color: var(--bg);
+}
+
+form {
+    background-color: var(--secondary);
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px black;
+    padding: 10%;
+}
+
+sup {
+    color: red;
+}
