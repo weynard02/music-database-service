@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::get('/', [SongController::class, 'index']);
 Route::get('/form', [SongController::class, 'create']);
 Route::post('/submit', [SongController::class, 'store']);
