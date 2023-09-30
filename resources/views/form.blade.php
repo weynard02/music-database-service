@@ -46,6 +46,10 @@
         @error('tags')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+        
         <button type="submit" class="btn btn-success">Submit</button>
     </form>
 @endsection

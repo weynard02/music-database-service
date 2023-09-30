@@ -12,7 +12,8 @@ class SongController extends Controller
      */
     public function index()
     {
-        //
+        $songs = Song::all();
+        return view('index', compact('songs'));
     }
 
     /**
@@ -55,7 +56,7 @@ class SongController extends Controller
             'tags' => $request->tags
         ]);
 
-        return redirect('/form');
+        return redirect('/form')->with('success', 'Input successfully!');
 
     }
 
