@@ -11,7 +11,7 @@
     @else
     <div class="row g-2">
         @foreach ($songs as $i)
-        <div class="col-6">
+        <div class="col-4">
             <div class="p-3">
                 <div class="card" style="width: 18rem;">
                     @if ($i->thumbnail_path)
