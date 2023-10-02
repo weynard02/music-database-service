@@ -6,11 +6,11 @@
         <h2>Song Form</h2>
         <div class="mb-3">
             <label for="title" class="form-label">Title Song <sup>*</sup></label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Idol" value="{{ old('title') }}">
+            <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title..." value="{{ old('title') }}">
         </div>
         <div class="mb-3">
             <label for="artist" class="form-label">Artist <sup>*</sup></label>
-            <input type="text" class="form-control" id="artist" name="artist" placeholder="YOASOBI" value="{{ old('artist') }}">
+            <input type="text" class="form-control" id="artist" name="artist" placeholder="Enter Artist..." value="{{ old('artist') }}">
         </div>
         <div class="mb-3">
             <label for="release_date" class="form-label">Release Date <sup>*</sup></label>
