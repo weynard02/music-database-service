@@ -27,6 +27,7 @@
                         <source src="{{ asset('storage/songs/'. $i->file_audio_path)}}" type="audio/mpeg">
                     Your browser does not support the audio element.
                     </audio>
+                    Tags: <br>
                     <p class="card-text">{{ $i->tags }}</p>
                     </div>
                 </div>
