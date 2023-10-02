@@ -13,3 +13,13 @@
 | Akhmad Mustofa Solikin    | 5025211230 |
 
 ## Topik FP: Music Streaming Service
+
+How to use:
+1. Prepare database (follow .env)
+2. serve on localhost
+```
+php artisan serve
+php artisan storage:link //if needed
+```  
+3. Add Song
+4. Submit and go back to see the result!
