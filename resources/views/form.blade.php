@@ -49,7 +49,8 @@
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
-        
+
+        <a href="/" class="btn btn-danger">&lt; Back</a>
         <button type="submit" class="btn btn-success">Submit</button>
     </form>
 @endsection

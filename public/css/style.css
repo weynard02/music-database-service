@@ -16,6 +16,7 @@ body {
     -ms-transform: translate(-50%, 50%);
     transform: translate(-50%, -50%);
     background-color: var(--bg);
+    color: var(--primary);
 }
 
 form {
@@ -24,6 +25,7 @@ form {
     border-radius: 5px;
     box-shadow: 10px 5px 5px black;
     padding: 10%;
+    color: black;
 }
 
 sup {
