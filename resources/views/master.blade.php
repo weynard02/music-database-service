@@ -9,7 +9,7 @@
     <link rel="icon" href="icon.png" type="icon">
   </head>
   <body>
-    <div>
+    <div class="d-flex align-items-center justify-content-center">
       @yield('content')
     </div>
     

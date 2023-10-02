@@ -8,11 +8,7 @@
 }
 body {
     font-family: "Onest", sans-serif;
-    display: flex;
-    height: 100vh;
-    margin: 0;
-    justify-content: center;
-    align-items: center;
+    margin: 5% 25% 5%;
     background-color: var(--bg);
     color: var(--primary);
 }
@@ -22,7 +18,7 @@ form {
     border: 1px solid black;
     border-radius: 5px;
     box-shadow: 10px 5px 5px black;
-    padding: 10%;
+    padding: 5%;
     color: black;
 }
 
