@@ -20,7 +20,7 @@
                 @endif
                 <div class="card-body">
                 <h5 class="card-title">{{ $i->title }}</h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">{{ $i->artist }}, {{ $i->release_date }}</h6>
+                <h6 class="card-subtitle mb-2 text-body-secondary">{{ $i->artist->name }}, {{ $i->release_date }}</h6>
                 
                 <audio controls style="width: 100%; max-width: 600px">
                     <source src="{{ asset('storage/songs/'. $i->file_audio_path)}}" type="audio/mpeg">
