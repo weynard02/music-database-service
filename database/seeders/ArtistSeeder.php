@@ -12,6 +12,6 @@ class ArtistSeeder extends Seeder
      */
     public function run(): void
     {
-        Artist: :factory()->count(3)->create();
+        Artist::factory()->count(3)->create();
     }
 }
