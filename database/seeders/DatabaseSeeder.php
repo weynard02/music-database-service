@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             SongSeeder::class,
+            PlanSeeder::class,
         ]);    
     }
     

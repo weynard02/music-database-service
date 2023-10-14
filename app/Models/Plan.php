@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Artist extends Model
+class Plan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'is_verified'];
+    protected $fillable = ['name', 'price'];
 
-    public function songs(): HasMany
+    public function users(): HasMany
     {
-        return $this->hasMany(Song::class);
+        return $this->hasMany(User::class);
     }
 }
