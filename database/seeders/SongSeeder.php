@@ -14,8 +14,8 @@ class SongSeeder extends Seeder
      */
     public function run(): void
     {
-        Song::factory()->count(10)->for(Artist::factory()->state([
-            'name' => 'Raon Invers'
+        Song::factory()->count(1)->for(Artist::factory()->state([
+            'name' => 'YOASOBI'
         ]))->create();
     }
 }

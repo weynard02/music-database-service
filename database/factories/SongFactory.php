@@ -17,8 +17,8 @@ class SongFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence(),
-            'release_date' => $this->faker->date(),
+            'title' => 'Idol',
+            'release_date' => '2023-04-12',
             'file_audio_path' => 'yoasobi-idol.mp3'
         ];
     }
