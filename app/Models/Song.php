@@ -14,7 +14,7 @@ class Song extends Model
     protected $table = 'songs';
     protected $primaryKey = 'id';
 
-    protected $fillable = ['title', 'release_date','file_audio_path', 'thumbnail_path', 'streams', 'tags'];
+    protected $fillable = ['title', 'release_date','file_audio_path', 'thumbnail_path', 'tags', 'artist_id'];
 
     public function artist(): BelongsTo 
     {

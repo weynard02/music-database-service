@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artist;
 use App\Models\Song;
 use Illuminate\Http\Request;
 
@@ -47,13 +48,23 @@ class SongController extends Controller
             $request->thumbnail->storeAs('public/thumbnails', $thumbnailPath);
         }
 
+        if(!Artist::firstWhere('name', $request->artist)) {
+            Artist::create([
+                'name' => $request->artist,
+                'description' => 'TBA',
+                'is_verified' => false
+            ]);
+        }
+
+        $artistId = Artist::firstWhere('name', $request->artist)->id;
+
         Song::create([
             'title' => $request->title,
-            'artist' => $request->artist,
             'release_date' => $request->release_date,
             'file_audio_path' => $audioPath,
             'thumbnail_path' => $thumbnailPath,
-            'tags' => $request->tags
+            'tags' => $request->tags,
+            'artist_id' => $artistId,
         ]);
 
         return redirect('/form')->with('success', 'Input successfully!');

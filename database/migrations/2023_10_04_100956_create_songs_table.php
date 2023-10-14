@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('release_date');
             $table->string('file_audio_path');
             $table->string('thumbnail_path')->nullable();
-            $table->integer('streams');
+            $table->integer('streams')->default(0);
             $table->string('tags')->nullable();
             $table->foreignId('artist_id')->constrained();
             $table->timestamps();
