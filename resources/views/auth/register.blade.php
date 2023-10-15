@@ -16,6 +16,17 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <!-- Plan -->
+        <div class="mt-4">
+            <x-input-label for="plan" :value="__('Plan')" />
+            <select name="plan" id="plan" class="bg-white-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="1">Free</option>
+                <option value="2">Student</option>
+                <option value="3">Premium</option>
+            </select>
+            <x-input-error :messages="$errors->get('plan')" class="mt-2" />
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
