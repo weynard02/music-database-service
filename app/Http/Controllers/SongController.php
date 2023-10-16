@@ -67,7 +67,7 @@ class SongController extends Controller
             'artist_id' => $artistId,
         ]);
 
-        return redirect('/form')->with('success', 'Input successfully!');
+        return redirect('/create')->with('success', 'Input successfully!');
 
     }
 
