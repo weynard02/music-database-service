@@ -22,7 +22,7 @@ class SongController extends Controller
      */
     public function create()
     {
-        return view('form');
+        return view('admin.create');
     }
 
     /**

@@ -41,6 +41,11 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
+                        @if(Auth::user()->plan_id == 4)
+                        <x-dropdown-link :href="route('create')">
+                            {{ __('Add Song') }}
+                        </x-dropdown-link>
+                        @endif
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
