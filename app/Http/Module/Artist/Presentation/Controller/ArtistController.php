@@ -4,6 +4,7 @@ namespace App\Http\Module\Artist\Presentation\Controller;
 
 use App\Http\Module\Artist\Application\Services\CreateArtist\CreateArtistRequest;
 use App\Http\Module\Artist\Application\Services\CreateArtist\CreateArtistService;
+use Illuminate\Support\Facades\Request;
 
 class ArtistController
 {

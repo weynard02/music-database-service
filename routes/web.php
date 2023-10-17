@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+foreach (scandir($path = app_path('Http\Module')) as $dir) {
+    if (file_exists($filepath = "{$path}/{$dir}/Presentation/web.php")) {
+        require $filepath;
+    }
+}
+
+
 Route::get('/', function () {
     return view('welcome');
 });
