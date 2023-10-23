@@ -42,6 +42,9 @@
                         </x-dropdown-link>
 
                         @if(Auth::user()->plan_id == 4)
+                        <x-dropdown-link :href="route('admin')">
+                            {{ __('Admin Menu') }}
+                        </x-dropdown-link>
                         <x-dropdown-link :href="route('create')">
                             {{ __('Add Song') }}
                         </x-dropdown-link>

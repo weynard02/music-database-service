@@ -2,32 +2,33 @@
 
 @section('content')
 <div class="containter p-5">
-    <form action="/admin/submit" method="POST" enctype="multipart/form-data">
+    <form action="/admin/update/{{$song->id}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <h2>Song Form</h2>
+        @method('put')
+        <h2>Edit song</h2>
         <div class="mb-3">
             <label for="title" class="form-label">Title Song <sup>*</sup></label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title..." value="{{ old('title') }}">
+            <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title..." value="{{ $song->title }}">
         </div>
         <div class="mb-3">
             <label for="artist" class="form-label">Artist <sup>*</sup></label>
-            <input type="text" class="form-control" id="artist" name="artist" placeholder="Enter Artist..." value="{{ old('artist') }}">
+            <input type="text" class="form-control" id="artist" name="artist" placeholder="Enter Artist..." value="{{ $song->artist->name }}">
         </div>
         <div class="mb-3">
             <label for="release_date" class="form-label">Release Date <sup>*</sup></label>
-            <input type="date" class="form-control" id="release_date" name="release_date" value="{{ old('release_date') }}">
+            <input type="date" class="form-control" id="release_date" name="release_date" value="{{ $song->release_date }}">
         </div>
         <div class="mb-3">
-            <label for="audio" class="form-label">Audio File <sup>*</sup></label>
-            <input class="form-control" type="file" id="audio" name="audio" value="{{ old('audio') }}">
+            <label for="audio" class="form-label">Audio File (Upload if you want to replace)</label>
+            <input class="form-control" type="file" id="audio" name="audio" value="{{ $song->file_audio_path }}">
         </div>
         <div class="mb-3">
-            <label for="thumbnail" class="form-label">Thumbnail</label>
-            <input class="form-control" type="file" id="thumbnail" name="thumbnail" value="{{ old('thumbnail') }}">
+            <label for="thumbnail" class="form-label">Thumbnail (Upload if you want to replace)</label>
+            <input class="form-control" type="file" id="thumbnail" name="thumbnail" value="{{ $song->thumbnail_path }}">
         </div>
         <div class="mb-3">
             <label for="tags" class="form-label">Tags</label>
-            <textarea class="form-control" id="tags" rows="3" name="tags" placeholder="Max 255 charaters">{{ old('tags') }}</textarea>
+            <textarea class="form-control" id="tags" rows="3" name="tags" placeholder="Max 255 charaters">{{$song->tags}}</textarea>
         </div>
         @error('title')
             <div class="alert alert-danger">{{ $message }}</div>
