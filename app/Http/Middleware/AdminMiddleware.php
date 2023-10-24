@@ -15,7 +15,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next) 
     {
-        if(Auth::check() && Auth::user()->plan_id == 4)
+        if(Auth::check() && Auth::user()->plan->name == 'admin')
         {
             return $next($request);
         }
