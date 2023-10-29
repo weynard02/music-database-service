@@ -18,11 +18,11 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => 'pwadmin', // password
-            'plan_id' => 4,
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'plan_id' => random_int(1,3),
             'remember_token' => Str::random(10),
         ];
     }
