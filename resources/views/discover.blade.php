@@ -24,11 +24,12 @@
                     <h6 class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
                         {{ $i->artist->name }}, {{ $i->release_date }}
                     </h6>
+                    
                     <audio controls style="width: 100%; max-width: 600px">
                         <source src="{{ asset('storage/songs/'. $i->file_audio_path)}}" type="audio/mpeg">
                     Your browser does not support the audio element.
                     </audio>
-                    <h6 class="mb-4 text-base text-neutral-600 dark:text-neutral-200">Tags: </h6>
+                    <h6 class="mb-4 text-base text-neutral-600 dark:text-neutral-200">{{ $i->streams }} streams</h6>
                     <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">{{ $i->tags }}</p>
                   </div>
                 </div>
