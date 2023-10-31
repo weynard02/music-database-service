@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Artist;
 use App\Models\Song;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class SongController extends Controller
 {
@@ -13,7 +15,11 @@ class SongController extends Controller
      */
     public function index()
     {
-        $songs = Song::all();
+        // $songs = Song::all();
+        $seconds = 10;
+        $songs = Cache::remember('songs', $seconds, function () {
+            return Song::all();
+        });
         return view('discover', compact('songs'));
     }
 
