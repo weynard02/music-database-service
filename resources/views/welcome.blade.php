@@ -41,7 +41,7 @@
               data-te-ripple-init data-te-ripple-color="light" href="/dashboard" role="button">Let's go</a>
           </div>
           <!-- Jumbotron -->
-
+          
         </div>
     </body>
 </html>

@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/songs', [SongController::class, 'index'])->middleware(['auth', 'verified'])->name('songs');
+Route::get('/songs/{id}', [SongController::class, 'show'])->middleware(['auth', 'verified']);
 Route::get('/create', [SongController::class, 'create'])->middleware(['auth', 'verified'])->name('create');;
 Route::post('/submit', [SongController::class, 'store'])->middleware(['auth', 'verified']);
 

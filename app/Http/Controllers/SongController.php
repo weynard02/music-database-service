@@ -80,9 +80,10 @@ class SongController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Song $song)
+    public function show($id)
     {
-        //
+        $song = Song::findorfail($id);
+        return view('song', compact('song'));
     }
 
     /**

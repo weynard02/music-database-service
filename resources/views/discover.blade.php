@@ -25,11 +25,13 @@
                         {{ $i->artist->name }}, {{ $i->release_date }}
                     </h6>
                     
-                    <audio controls style="width: 100%; max-width: 600px">
-                        <source src="{{ asset('storage/songs/'. $i->file_audio_path)}}" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                    </audio>
-                    <h6 class="mb-4 text-base text-neutral-600 dark:text-neutral-200">{{ $i->streams }} streams</h6>
+                    <a href="/songs/{{ $i->id }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                        Listen
+                    </a>
+                    {{--  --}}
+                    
+                    
+                    <h6 class="mt-4 mb-4 text-base text-neutral-600 dark:text-neutral-200">{{ $i->streams }} streams</h6>
                     <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">{{ $i->tags }}</p>
                   </div>
                 </div>
