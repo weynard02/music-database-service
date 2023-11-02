@@ -17,10 +17,10 @@ class SongFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => 'Idol',
-            'release_date' => '2023-04-12',
+            'title' => fake()->catchPhrase(),
+            'release_date' => fake()->date(),
             'streams' => 0,
-            'file_audio_path' => 'yoasobi-idol.mp3'
+            'file_audio_path' => 'sample.mp3'
         ];
     }
 }
