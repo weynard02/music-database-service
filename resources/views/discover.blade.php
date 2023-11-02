@@ -24,18 +24,18 @@
                     <h6 class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
                         {{ $i->artist->name }}, {{ $i->release_date }}
                     </h6>
-{{--                     
+                    
                     <a href="/songs/{{ $i->id }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
                         Listen
-                    </a> --}}
+                    </a>
                     {{--  --}}
                     
-                    <!-- Modal toggle -->
+                    {{-- <!-- Modal toggle -->
                     <button data-modal-target="default-modal-{{ $i->id }}" data-modal-toggle="default-modal-{{ $i->id }}" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                         Listen
-                    </button>
+                    </button> --}}
                     
-                    <!-- Main modal -->
+                    {{-- <!-- Main modal -->
                     <div id="default-modal-{{ $i->id }}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative w-full max-w-2xl max-h-full">
                             <!-- Modal content -->
@@ -68,7 +68,7 @@
                                             {{ $i->artist->name }}
                                         </h4>
                                     </div>
-                                    <button type="button" onclick="play({{$i->id}})" class="mx-3 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                    <button type="button" onclick="play({{$i->id}}, {{$i->streams}})" class="mx-3 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                         <i data-feather="play"></i>
                                     </button>
                                     <button type="button" onclick="pause({{$i->id}})" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
@@ -78,6 +78,7 @@
                                         <source src="{{ asset('storage/songs/'. $i->file_audio_path)}}" type="audio/mpeg">
                                     Your browser does not support the audio element.
                                     </audio>
+                                    <input type="number" id="newStreams-{{$i->id}}" hidden>
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -85,7 +86,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
   
                     
                     <h6 class="mt-4 mb-4 text-base text-neutral-600 dark:text-neutral-200">{{ $i->streams }} streams</h6>

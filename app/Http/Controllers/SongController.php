@@ -83,6 +83,7 @@ class SongController extends Controller
     public function show($id)
     {
         $song = Song::findorfail($id);
+        $song->increment('streams');
         return view('song', compact('song'));
     }
 

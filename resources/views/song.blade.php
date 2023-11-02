@@ -9,17 +9,35 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg ">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    @if ($song->thumbnail_path)
-                        <img src="{{ asset('storage/thumbnails/' . $song->thumbnail_path) }}" class="h-auto max-w-lg rounded-t-lg" alt="Thumbnail not uploaded">
-                    @else
-                        <img src="{{ asset('default_thumbnail.jpeg') }}" class="h-auto max-w-lg rounded-t-lg">
-                    @endif
-                    <audio controls style="width: 100%;">
-                        <source src="{{ asset('storage/songs/'. $song->file_audio_path)}}" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                    </audio>
+                    <div class="p-6 space-y-6">
+                        <div class="columns-2">
+                            @if ($song->thumbnail_path)
+                                <img src="{{ asset('storage/thumbnails/' . $song->thumbnail_path) }}" class="mx-3 w-56 h-auto max-w-lg rounded-lg" alt="Thumbnail not uploaded">
+                            @else
+                                <img src="{{ asset('default_thumbnail.jpeg') }}" class="mx-3 w-56 h-auto max-w-lg rounded-lg">
+                            @endif
+                            <h2
+                            class="mb-2 text-3xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                                {{ $song->title }}
+                            </h2>
+                            <h4 class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                                {{ $song->artist->name }}
+                            </h4>
+                        </div>
+                        <button type="button" onclick="play({{$song->id}})" class="mx-3 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <i data-feather="play"></i>
+                        </button>
+                        <button type="button" onclick="pause({{$song->id}})" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                            <i data-feather="pause"></i>
+                        </button>
+                        <audio id="audio-{{$song->id}}">
+                            <source src="{{ asset('storage/songs/'. $song->file_audio_path)}}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                        </audio>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="../js/audio.js"></script>
 </x-app-layout>
