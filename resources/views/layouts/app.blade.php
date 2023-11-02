@@ -13,7 +13,9 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.css" rel="stylesheet" />
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/playsong.js'])
+        <script src="https://unpkg.com/feather-icons"></script>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -34,5 +36,9 @@
             </main>
         </div>
     </body>
+    <script>
+        feather.replace()
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
+    <script src="js/audio.js"></script>
 </html>
