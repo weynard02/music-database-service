@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('song_id')->constained();
             $table->foreignId('user_id')->constrained();
             $table->boolean('is_favourite')->default(false);
-            $table->integer('rate')->default(0);
             $table->timestamps();
         });
     }
