@@ -6,13 +6,13 @@
       <div class="alert alert-success">{{ session('success') }}</div>
   @endif
   <div class="row row-cols-1 row-cols-md-2 g-4">
-    @foreach($songs as $s)
+    @foreach($users as $i)
     <div class="col">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">{{ $s->artist->name }} - {{ $s->title }}</h5>
-          <p class="card-text"><small class="text-body-secondary">{{ $s->release_date }}</small></p>
-          <a href="{{ route('admin.show', ['id'=>$s->id]) }}" class="btn btn-primary">Show</a>
+          <h5 class="card-title">{{ $i->name }}</h5>
+          <p class="card-text">{{ $i->email}} <small class="text-body-secondary">{{ $i->plan->name }}</small></p>
+          <a href="#" class="btn btn-primary">Show</a>
         </div>
       </div>
     </div>

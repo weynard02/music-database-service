@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SongController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,5 +47,7 @@ Route::post('/admin/submit', [AdminController::class, 'store'])->middleware(['au
 Route::get('/admin/edit/{id}', [AdminController::class, 'edit'])->middleware(['auth', 'verified', 'admin'])->name('admin.edit');
 Route::put('/admin/update/{id}', [AdminController::class, 'update'])->middleware(['auth', 'verified', 'admin']);
 Route::delete('/admin/delete/{id}', [AdminController::class, 'destroy'])->middleware(['auth', 'verified', 'admin']);
+
+Route::get('/admin/users', [UserController::class, 'index'])->middleware(['auth', 'verified', 'admin'])->name('admin.index.user');
 
 require __DIR__.'/auth.php';
