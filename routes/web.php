@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
+use App\Models\Playlist;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,12 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
+Route::get('/dashboard', [SongController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -38,6 +35,13 @@ Route::get('/songs', [SongController::class, 'index'])->middleware(['auth', 'ver
 Route::get('/songs/{id}', [SongController::class, 'show'])->middleware(['auth', 'verified']);
 Route::get('/create', [SongController::class, 'create'])->middleware(['auth', 'verified'])->name('create');;
 Route::post('/submit', [SongController::class, 'store'])->middleware(['auth', 'verified']);
+Route::get('/playlists', [PlaylistController::class, 'index'])->middleware(['auth', 'verified'])->name('playlist');
+Route::get('/playlists/create', [PlaylistController::class, 'create'])->middleware(['auth', 'verified']);
+Route::post('/playlists/create', [PlaylistController::class, 'store'])->middleware(['auth', 'verified']);
+Route::post('/playlists/add/{id}', [PlaylistController::class, 'storePivot'])->middleware(['auth', 'verified']);
+Route::get('/playlists/{id}', [PlaylistController::class, 'show'])->middleware(['auth', 'verified']);
+Route::delete('/playlists/{playlistId}/{songId}', [PlaylistController::class, 'destroyPivot'])->middleware(['auth', 'verified']);
+
 
 Route::get('/admin', [AdminController::class, 'adminHome'])->middleware(['auth', 'verified', 'admin'])->name('admin');
 Route::get('/admin/songs', [AdminController::class, 'index'])->middleware(['auth', 'verified', 'admin'])->name('admin.index');
