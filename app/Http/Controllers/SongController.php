@@ -10,12 +10,25 @@ use Illuminate\Support\Facades\DB;
 
 class SongController extends Controller
 {
+    public function dashboard() {
+        $popularChart = Song::all()->sortByDesc('streams')->take(10);
+        return view('dashboard', compact('popularChart'));
+    }
+    
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // $songs = Song::all();
+        if ($request->song) {
+            $songs = Song::join('artists', 'artists.id', '=', 'songs.artist_id')
+            ->where('tags', 'LIKE', '%'.$request->song.'%')
+            ->orWhere('title', 'LIKE', '%'.$request->song.'%')
+            ->orWhere('artists.name', 'LIKE', '%'.$request->song.'%')
+            ->paginate(20);
+            return view('discover', compact('songs'));  
+        }
+
         $seconds = 10;
         $songs = Cache::remember('songs', $seconds, function () {
             return Song::paginate(20);
@@ -73,7 +86,7 @@ class SongController extends Controller
             'artist_id' => $artistId,
         ]);
 
-        return redirect('/create')->with('success', 'Input successfully!');
+        return redirect('/discover')->with('success', 'Input successfully!');
 
     }
 

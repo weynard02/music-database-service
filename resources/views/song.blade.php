@@ -27,14 +27,20 @@
                         <button id="button-{{$song->id}}" type="button" onclick="toggle({{$song->id}})" class="mx-3 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                             <i data-feather="pause"></i>
                         </button>
+                        
                         <audio autoplay id="audio-{{$song->id}}">
                             <source src="{{ asset('storage/songs/'. $song->file_audio_path)}}" type="audio/mpeg">
                         Your browser does not support the audio element.
                         </audio>
+                        <progress id="progressBar-{{$song->id}}" value="0" max="100" class="w-full h-4 bg-gray-300 rounded-full overflow-hidden"></progress>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="../js/audio.js"></script>
+    <script>
+        progressBarUpdate({{ $song->id }});
+    </script>
 </x-app-layout>
