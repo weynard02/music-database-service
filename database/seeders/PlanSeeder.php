@@ -13,8 +13,8 @@ class PlanSeeder extends Seeder
      */
     public function run(): void
     {
-        $plan = array("free", "student", "premium", "admin");
-        $price = array(0, 27500, 50000, 0);
+        $plan = array("free", "premium", "admin");
+        $price = array(0, 50000, 0);
         $len = count($plan);
         for($i=0;$i<$len;$i++) {
             Plan::create([

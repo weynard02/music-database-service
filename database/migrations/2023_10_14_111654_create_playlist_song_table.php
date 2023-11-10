@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('playlist_id')->constained();
             $table->foreignId('song_id')->constrained();
             $table->increments('order');
-            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

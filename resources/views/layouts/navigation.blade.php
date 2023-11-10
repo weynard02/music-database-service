@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('songs')" :active="request()->routeIs('songs')">
                         {{ __('Discover') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('playlist')" :active="request()->routeIs('playlist')">
+                        {{ __('Playlists') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -41,7 +44,7 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
-                        @if(Auth::user()->plan_id == 4)
+                        @if(Auth::user()->plan->name == 'admin')
                         <x-dropdown-link :href="route('admin')">
                             {{ __('Admin Menu') }}
                         </x-dropdown-link>

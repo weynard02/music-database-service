@@ -10,7 +10,7 @@ class Artist extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'is_verified'];
+    protected $fillable = ['name', 'description'];
 
     public function songs(): HasMany
     {

@@ -22,8 +22,9 @@ class UserSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
-            'password' => 'pwadmin', // password
-            'plan_id' => 4,
+            'password' => 'pwadmin', 
+            'plan_id' => 3,
+            'is_verified' => true,
             'remember_token' => Str::random(10),
         ]);
     }
