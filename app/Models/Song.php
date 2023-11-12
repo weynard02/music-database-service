@@ -21,13 +21,13 @@ class Song extends Model
         return $this->belongsTo(Artist::class);
     }
 
-    public function albums(): BelongsToMany
-    {
-        return $this->belongsToMany(Album::class);
-    }
-
     public function genres(): BelongsToMany
     {
         return $this->belongsToMany(Genre::class);
+    }
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class)->withPivot('is_favourite', 'voted')->withTimestamps();
     }
 }

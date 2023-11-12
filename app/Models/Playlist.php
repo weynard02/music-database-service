@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Playlist extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'user_id', 'type'];
+    protected $fillable = ['name', 'user_id', 'type', 'is_public'];
 
     public function songs(): BelongsToMany
     {
