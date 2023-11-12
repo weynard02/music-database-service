@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/songs', [SongController::class, 'index'])->middleware(['auth', 'verified'])->name('songs');
 Route::get('/songs/{id}', [SongController::class, 'show'])->middleware(['auth', 'verified']);
+Route::get('/songs/fav/{id}', [SongController::class, 'setFavorite'])->middleware(['auth', 'verified']);
 Route::get('/create', [SongController::class, 'create'])->middleware(['auth', 'verified'])->name('create');;
 Route::post('/submit', [SongController::class, 'store'])->middleware(['auth', 'verified']);
 Route::get('/playlists', [PlaylistController::class, 'index'])->middleware(['auth', 'verified'])->name('playlist');

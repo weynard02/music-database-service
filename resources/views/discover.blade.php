@@ -40,9 +40,23 @@
                         {{ $i->artist->name }}, {{ $i->release_date }}
                     </h6>
                     
-                    <a href="/songs/{{ $i->id }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
-                        Listen
-                    </a> 
+                    <div class="flex flex-row gap-4">
+                        <a href="/songs/{{ $i->id }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                            Listen
+                        </a> 
+                        <a href="/songs/fav/{{$i->id}}" class="mt-2 text-white">
+                            {{-- Checking if the pivot data exist or not or if it exists, is it favorite or not --}}
+                            @php
+                                $pivot =  $songUser->where('user_id', Auth::user()->id)->where('song_id',$i->id)->first()
+                            @endphp
+                            @if( $pivot && $pivot->is_favourite == true)
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35Z"/></svg>
+                            @else
+                                <i data-feather="heart"></i>
+                            @endif
+                        </a>
+                    </div>
+                    
                     
                     <h6 class="mt-4 mb-4 text-base text-neutral-600 dark:text-neutral-200">{{ $i->streams }} streams</h6>
                     <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">{{ $i->tags }}</p>

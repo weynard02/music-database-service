@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artist;
+use App\Models\Playlist;
 use App\Models\Song;
+use App\Models\SongUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +15,10 @@ class SongController extends Controller
 {
     public function dashboard() {
         $popularChart = Song::all()->sortByDesc('streams')->take(10);
-        return view('dashboard', compact('popularChart'));
+        $newSongs = Song::all()->sortByDesc('release_date')->take(10);
+        $randomPlaylist = Playlist::where('is_public', '1')->inRandomOrder()->first();
+
+        return view('dashboard', compact('popularChart', 'newSongs', 'randomPlaylist'));
     }
     
     /**
@@ -33,7 +39,9 @@ class SongController extends Controller
         $songs = Cache::remember('songs', $seconds, function () {
             return Song::paginate(20);
         });
-        return view('discover', compact('songs'));
+
+        $songUser = SongUser::all();
+        return view('discover', compact('songs', 'songUser'));
     }
 
     /**
@@ -86,7 +94,7 @@ class SongController extends Controller
             'artist_id' => $artistId,
         ]);
 
-        return redirect('/discover')->with('success', 'Input successfully!');
+        return redirect('/songs')->with('success', 'Input successfully!');
 
     }
 
@@ -107,6 +115,40 @@ class SongController extends Controller
     {
         //
     }
+
+    /**
+     * Update Favorite
+     */
+    public function setFavorite($id) {
+        $user = Auth::user();
+        $song = Song::findOrFail($id);
+    
+        $songUser = SongUser::where('user_id', $user->id)
+            ->where('song_id', $song->id)
+            ->first();
+    
+        if ($songUser) {
+            $value = $songUser->is_favourite == 1 ? 0 : 1;
+    
+            // Update the 'is_favourite' column with the new value
+            $songUser->where('user_id', $user->id)
+            ->where('song_id', $song->id)->update([
+                'is_favourite' => $value
+            ]);
+    
+            return redirect('/songs')->with('success', 'Update successfully!');
+        }
+    
+        // If the record doesn't exist, create a new one
+        SongUser::create([
+            'user_id' => $user->id,
+            'song_id' => $song->id,
+            'is_favourite' => true,
+        ]);
+    
+        return redirect('/songs')->with('success', 'Update successfully!');
+    }
+    
 
     /**
      * Update the specified resource in storage.

@@ -39,14 +39,20 @@ class PlaylistController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'songs.*' => 'required|exists:songs,id'
+            'songs.*' => 'required|exists:songs,id',
+            'type' => 'required',
+
         ], [
             'songs.*' => 'Select song required!'
         ]);
 
+        $is_public = false;
+        if ($request->public) $is_public = true;
+
         $playlist = Playlist::create([
             'name'=> $request->name,
             'type'=> $request->type,
+            'is_public'=> $is_public,
             'user_id' => auth()->user()->id
         ]);
 
@@ -72,7 +78,10 @@ class PlaylistController extends Controller
     public function show($id)
     {
         $playlist = Playlist::findorfail($id);
+
+        // songs untuk menselect lagi
         $songs = Song::all()->sortBy('title'); 
+        if ($playlist->type == 'Chart') return view('playlist.chart', compact('playlist', 'songs'));
         return view('playlist.show', compact('playlist', 'songs'));
     }
 

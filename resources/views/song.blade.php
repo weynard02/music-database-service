@@ -24,10 +24,14 @@
                                 {{ $song->artist->name }}
                             </h4>
                         </div>
+                        
+                        <button id="replay-{{$song->id}}" type="button" onclick="replay({{$song->id}})" class="mx-3 text-black bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">
+                            <i data-feather="skip-back"></i>
+                        </button>
+
                         <button id="button-{{$song->id}}" type="button" onclick="toggle({{$song->id}})" class="mx-3 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                             <i data-feather="pause"></i>
                         </button>
-                        
                         <audio autoplay id="audio-{{$song->id}}">
                             <source src="{{ asset('storage/songs/'. $song->file_audio_path)}}" type="audio/mpeg">
                         Your browser does not support the audio element.
