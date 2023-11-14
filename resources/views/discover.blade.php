@@ -44,7 +44,7 @@
                         <a href="/songs/{{ $i->id }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
                             Listen
                         </a> 
-                        <a href="/songs/fav/{{$i->id}}" class="mt-2 text-white">
+                        <a href="/songs/fav/{{$i->id}}" class="mt-2 text-red-400 dark:text-white">
                             {{-- Checking if the pivot data exist or not or if it exists, is it favorite or not --}}
                             @php
                                 $pivot =  $songUser->where('user_id', Auth::user()->id)->where('song_id',$i->id)->first()
