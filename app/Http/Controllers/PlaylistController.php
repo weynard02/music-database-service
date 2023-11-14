@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Playlist;
 use App\Models\PlaylistSong;
 use App\Models\Song;
+use App\Models\SongUser;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PlaylistController extends Controller
 {
@@ -81,7 +84,7 @@ class PlaylistController extends Controller
 
         // songs untuk menselect lagi
         $songs = Song::all()->sortBy('title'); 
-        if ($playlist->type == 'Chart') return view('playlist.chart', compact('playlist', 'songs'));
+        // if ($playlist->type == 'Chart') return view('playlist.chart', compact('playlist', 'songs'));
         return view('playlist.show', compact('playlist', 'songs'));
     }
 
