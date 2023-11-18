@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SongController;
@@ -42,6 +43,8 @@ Route::post('/playlists/create', [PlaylistController::class, 'store'])->middlewa
 Route::post('/playlists/add/{id}', [PlaylistController::class, 'storePivot'])->middleware(['auth', 'verified']);
 Route::get('/playlists/{id}', [PlaylistController::class, 'show'])->middleware(['auth', 'verified']);
 Route::delete('/playlists/{playlistId}/{songId}', [PlaylistController::class, 'destroyPivot'])->middleware(['auth', 'verified']);
+Route::get('/artists', [ArtistController::class,'index'])->middleware(['auth', 'verified'])->name('artist');
+Route::get('/artists/{id}', [ArtistController::class,'show'])->middleware(['auth', 'verified']);
 
 
 Route::get('/admin', [AdminController::class, 'adminHome'])->middleware(['auth', 'verified', 'admin'])->name('admin');

@@ -4,15 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Artist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ArtistController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->artist) {
+            $artists = Artist::where("name", "LIKE", "%".$request->artist."%")->paginate(10);
+            return view("artist.index", compact('artists'));
+        }
+        
+        $artists = Cache::remember('artists', 10, function() {
+            return Artist::orderBy('name')->paginate(10);
+        });
+        
+        return view('artist.index', compact('artists'));
+
+
     }
 
     /**
@@ -34,9 +46,10 @@ class ArtistController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Artist $artist)
+    public function show($id)
     {
-        //
+        $artist = Artist::findorfail($id);
+        return view('artist.show', compact('artist'));
     }
 
     /**

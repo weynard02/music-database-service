@@ -32,7 +32,8 @@ class SongController extends Controller
             ->orWhere('title', 'LIKE', '%'.$request->song.'%')
             ->orWhere('artists.name', 'LIKE', '%'.$request->song.'%')
             ->paginate(20);
-            return view('discover', compact('songs'));  
+            $songUser = SongUser::all();
+            return view('discover', compact('songs', 'songUser'));  
         }
 
         $seconds = 10;
