@@ -23,6 +23,19 @@
                             <h4 class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
                                 {{ $song->artist->name }}
                             </h4>
+                            <h5 class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                                Genre: 
+                                <p class="text-sm text-gray-900 dark:text-white">
+                                    @foreach($song->genres as $genre) 
+                                        <span class="capitalize">{{ $genre->name }}</span>, 
+                                    @endforeach
+                                </p>
+                            </h5>
+                            @if(Auth::user()->plan->name == 'admin' || Auth::user()->name == $song->artist->name)
+                            <a href="/genres/{{$song->id}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                Add Genres
+                            </a>
+                            @endif
                         </div>
                         
                         <button id="replay-{{$song->id}}" type="button" onclick="replay({{$song->id}})" class="mx-3 text-black bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">
@@ -31,6 +44,9 @@
 
                         <button id="button-{{$song->id}}" type="button" onclick="toggle({{$song->id}})" class="mx-3 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                             <i data-feather="pause"></i>
+                        </button>
+                        <button id="loop-{{$song->id}}" type="button" onclick="loop({{$song->id}})" class="mx-3 text-purple-700 hover:text-white border border-purple-700 rounded-full hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">
+                            <i data-feather="repeat"></i>
                         </button>
                         <audio autoplay id="audio-{{$song->id}}">
                             <source src="{{ asset('storage/songs/'. $song->file_audio_path)}}" type="audio/mpeg">
