@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SongController;
@@ -37,6 +38,9 @@ Route::get('/songs/{id}', [SongController::class, 'show'])->middleware(['auth', 
 Route::get('/songs/fav/{id}', [SongController::class, 'setFavorite'])->middleware(['auth', 'verified']);
 Route::get('/create', [SongController::class, 'create'])->middleware(['auth', 'verified'])->name('create');;
 Route::post('/submit', [SongController::class, 'store'])->middleware(['auth', 'verified']);
+Route::get('/genres/{id}', [GenreController::class, 'index'])->middleware(['auth', 'verified']);
+Route::post('/genres/add/{id}', [GenreController::class, 'store'])->middleware(['auth', 'verified']);
+
 Route::get('/playlists', [PlaylistController::class, 'index'])->middleware(['auth', 'verified'])->name('playlist');
 Route::get('/playlists/create', [PlaylistController::class, 'create'])->middleware(['auth', 'verified']);
 Route::post('/playlists/create', [PlaylistController::class, 'store'])->middleware(['auth', 'verified']);
