@@ -57,5 +57,7 @@ Route::put('/admin/update/{id}', [AdminController::class, 'update'])->middleware
 Route::delete('/admin/delete/{id}', [AdminController::class, 'destroy'])->middleware(['auth', 'verified', 'admin']);
 
 Route::get('/admin/users', [UserController::class, 'index'])->middleware(['auth', 'verified', 'admin'])->name('admin.index.user');
+Route::get('/admin/users/{id}', [UserController::class, 'show'])->middleware(['auth', 'verified', 'admin']);
+Route::delete('/admin/users/delete/{id}', [UserController::class, 'destroy'])->middleware(['auth', 'verified', 'admin']);
 
 require __DIR__.'/auth.php';

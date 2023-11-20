@@ -11,4 +11,15 @@ class UserController extends Controller
         $users = User::all()->sortBy('name');
         return view('admin.users', compact('users'));
     }
+
+    public function show($id) {
+        $user = User::findorfail($id);
+        return view('admin.showUser', compact('user'));
+    }
+
+    public function destroy($id) {
+        $user = User::findorfail($id);
+        $user->delete();
+        return redirect('/admin/users')->with('success', 'Delete successfully!');
+    }
 }

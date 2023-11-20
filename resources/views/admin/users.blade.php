@@ -12,7 +12,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ $i->name }}</h5>
           <p class="card-text">{{ $i->email}} <small class="text-body-secondary">{{ $i->plan->name }}</small></p>
-          <a href="#" class="btn btn-primary">Show</a>
+          <a href="/admin/users/{{$i->id}}" class="btn btn-primary">Show</a>
         </div>
       </div>
     </div>
