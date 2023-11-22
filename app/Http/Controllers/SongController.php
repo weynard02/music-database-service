@@ -27,7 +27,8 @@ class SongController extends Controller
     public function index(Request $request)
     {
         if ($request->song) {
-            $songs = Song::join('artists', 'artists.id', '=', 'songs.artist_id')
+            $songs = Song::select('songs.*')
+            ->join('artists', 'artists.id', '=', 'songs.artist_id')
             ->where('tags', 'LIKE', '%'.$request->song.'%')
             ->orWhere('title', 'LIKE', '%'.$request->song.'%')
             ->orWhere('artists.name', 'LIKE', '%'.$request->song.'%')
@@ -137,7 +138,7 @@ class SongController extends Controller
                 'is_favourite' => $value
             ]);
     
-            return redirect('/songs')->with('success', 'Update successfully!');
+            return redirect()->back()->with('success', 'Update successfully!');
         }
     
         // If the record doesn't exist, create a new one
