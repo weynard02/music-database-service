@@ -9,6 +9,7 @@ use App\Models\SongUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class PlaylistController extends Controller
 {
@@ -84,7 +85,10 @@ class PlaylistController extends Controller
 
         // songs untuk menselect lagi
         $songs = Song::all()->sortBy('title'); 
-        // if ($playlist->type == 'Chart') return view('playlist.chart', compact('playlist', 'songs'));
+        if ($playlist->type == 'Chart') {
+            $songUser = SongUser::all();
+            return view('playlist.chart', compact('playlist', 'songs', 'songUser'));
+        }
         return view('playlist.show', compact('playlist', 'songs'));
     }
 
