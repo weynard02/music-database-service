@@ -30,5 +30,12 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isPremium', function($user) {
             return $user->plan->name == 'premium';
         });
+
+        Gate::define('playlist-delete', function($user, $playlist){
+            return $user->id == $playlist->user_id; 
+        });
+        Gate::define('playlist-create-free', function($user){
+            return $user->plan->name == 'free' && count($user->playlists) >= 3; 
+        });
     }
 }

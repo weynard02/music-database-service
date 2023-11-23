@@ -9,7 +9,8 @@ use App\Models\SongUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PlaylistController extends Controller
 {
@@ -32,6 +33,7 @@ class PlaylistController extends Controller
      */
     public function create()
     {
+        if (Gate::allows('playlist-create-free')) return redirect()->back();
         $songs = Song::all()->sortBy('title');
         return view('playlist.create', compact('songs'));
     }
@@ -83,6 +85,9 @@ class PlaylistController extends Controller
     {
         $playlist = Playlist::findorfail($id);
 
+        if(!$playlist->is_public && $playlist->user_id != Auth::user()->id)
+            return redirect()->back();
+
         // songs untuk menselect lagi
         $songs = Song::all()->sortBy('title'); 
         // if ($playlist->type == 'Chart') {
@@ -111,9 +116,12 @@ class PlaylistController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Playlist $playlist)
+    public function destroy($id)
     {
-        //
+        $playlist = Playlist::findorfail($id);
+        $playlist->delete();
+
+        return redirect('/playlists')->with('success', 'Delete Playlist Successfully');
     }
 
     public function destroyPivot($playlistId, $songId) {

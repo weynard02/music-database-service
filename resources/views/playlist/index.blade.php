@@ -31,14 +31,15 @@
                         data-te-ripple-init data-te-ripple-color="light" href="/playlists/create" role="button">Create Playlist</a>
                 </div>
             @endif
-            @if(Auth::user()->plan->name = 'free' && count($playlists) == 3)
+            @if(Auth::user()->plan_id === 1 && count($playlists) == 3)
+                <h3 class="text-red-500">You only limited by 3 playlists because of using Free Plan</h3>
             @else
             <div class="py-5">
                 <a href="/playlists/create" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add Playlist</a>
             </div>
             @endif
             @foreach($playlists as $i) 
-            <a href="/playlists/{{$i->id}}" class="my-5 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <a href="/playlists/{{$i->id}}" class="my-5 block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$i->name}} <span class="text-sm font-normal text-gray-700 dark:text-gray-400">({{$i->is_public ? 'public' : 'private'}})</span> </h3>
                 <h5 class="font-normal text-gray-700 dark:text-gray-400">Click to listen!</h5>
             </a>
