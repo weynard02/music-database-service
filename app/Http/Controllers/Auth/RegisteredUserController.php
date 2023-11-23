@@ -38,17 +38,44 @@ class RegisteredUserController extends Controller
             'plan' => ['required'],
         ]);
 
+        $is_verified = 0;
+        if ($request->plan == 1) $is_verified = 1;
+    
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'plan_id' => $request->plan,
+            'is_verified' => $is_verified
         ]);
+
+
+        if ($request->plan == 2) return redirect('payment/'.$user->id);
 
         event(new Registered($user));
 
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
+    }
+
+    public function payment($id) {
+        $user = User::findorfail($id);
+        return view('auth.payment', compact('user'));
+    }
+
+    public function verify(Request $request) {
+        $is_verified = 1; 
+        $user = User::findorfail($request->id);
+        $user->update([
+            'is_verified' => $is_verified 
+        ]);
+        
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect(RouteServiceProvider::HOME);
+
     }
 }

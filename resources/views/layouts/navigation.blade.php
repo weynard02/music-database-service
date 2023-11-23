@@ -47,16 +47,17 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
-                        @if(Auth::user()->plan->name == 'admin')
+                        @can('isAdmin')
                         <x-dropdown-link :href="route('admin')">
                             {{ __('Admin Menu') }}
                         </x-dropdown-link>
-                        @endif
-                        @if(Auth::user()->plan->name == 'admin' || Auth::user()->plan->name == 'premium')
+                        @endcan
+                        
+                        @canany(['isAdmin', 'isPremium'])
                         <x-dropdown-link :href="route('create')">
                             {{ __('Add Song') }}
                         </x-dropdown-link>
-                        @endif
+                        @endcan
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
