@@ -90,10 +90,10 @@ class PlaylistController extends Controller
 
         // songs untuk menselect lagi
         $songs = Song::all()->sortBy('title'); 
-        // if ($playlist->type == 'Chart') {
-        //     $songUser = SongUser::all();
-        //     return view('playlist.chart', compact('playlist', 'songs', 'songUser'));
-        // }
+        if ($playlist->type == 'Chart') {
+            $playlistSong = PlaylistSong::where('playlist_id', $id)->get();
+            return view('playlist.chart', compact('playlist', 'songs', 'playlistSong'));
+        }
         return view('playlist.show', compact('playlist', 'songs'));
     }
 

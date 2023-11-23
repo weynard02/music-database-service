@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class PlaylistSong extends Pivot
 {
     //
-    protected $fillable = ['playlist_id', 'song_id', 'order'];
+    protected $fillable = ['playlist_id', 'song_id', 'order', 'points'];
 }
