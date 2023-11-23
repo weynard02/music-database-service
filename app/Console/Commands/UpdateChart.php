@@ -46,14 +46,15 @@ class UpdateChart extends Command
         ->where('is_favourite', true)
         ->groupBy('song_id')
         ->orderBy('count', 'desc') 
-        ->get();
+        ->limit(100)->get();
 
         // dd($songs);
         // daftarkan lagu tersebut ke playlist
         foreach ($songs as $song) {
             PlaylistSong::create([
                 'song_id'=> $song->song_id,
-                'playlist_id' => $pid
+                'playlist_id' => $pid,
+                'points' => $song->count
             ]);
         }
     }
