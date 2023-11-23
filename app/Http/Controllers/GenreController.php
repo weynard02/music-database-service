@@ -32,7 +32,8 @@ class GenreController extends Controller
     public function store(Request $request, $id)
     {
         $song = Song::findorfail($id);
-        $song->genres()->attach($request->genres);
+        $selectedGenres = $request->input('genres', []);
+        $song->genres()->sync($selectedGenres);
         $path = '/songs/' . $id;
         return redirect($path);
     }
