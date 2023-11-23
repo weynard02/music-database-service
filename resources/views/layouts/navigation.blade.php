@@ -51,6 +51,8 @@
                         <x-dropdown-link :href="route('admin')">
                             {{ __('Admin Menu') }}
                         </x-dropdown-link>
+                        @endif
+                        @if(Auth::user()->plan->name == 'admin' || Auth::user()->plan->name == 'premium')
                         <x-dropdown-link :href="route('create')">
                             {{ __('Add Song') }}
                         </x-dropdown-link>
