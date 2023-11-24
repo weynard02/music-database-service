@@ -18,10 +18,8 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{{ route('admin.index.user')}}">Users</a></li>
+            <li><a class="dropdown-item" href="{{ route('admin.index.artist')}}">Artists</a></li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
       </ul>
       <form class="d-flex" role="search">

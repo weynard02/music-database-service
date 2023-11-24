@@ -64,5 +64,9 @@ Route::delete('/admin/delete/{id}', [AdminController::class, 'destroy'])->middle
 Route::get('/admin/users', [UserController::class, 'index'])->middleware(['auth', 'verified', 'admin'])->name('admin.index.user');
 Route::get('/admin/users/{id}', [UserController::class, 'show'])->middleware(['auth', 'verified', 'admin']);
 Route::delete('/admin/users/delete/{id}', [UserController::class, 'destroy'])->middleware(['auth', 'verified', 'admin']);
-
+Route::get('/admin/artists', [ArtistController::class, 'indexAdmin'])->middleware(['auth', 'verified', 'admin'])->name('admin.index.artist');
+Route::get('/admin/artists/{id}', [ArtistController::class, 'showAdmin'])->middleware(['auth', 'verified', 'admin']);
+Route::get('/admin/artists/edit/{id}', [ArtistController::class, 'edit'])->middleware(['auth', 'verified', 'admin']);
+Route::delete('/admin/artists/delete/{id}', [ArtistController::class, 'destroy'])->middleware(['auth', 'verified', 'admin']);
+Route::put('/admin/artists/{id}', [ArtistController::class, 'update'])->middleware(['auth', 'verified', 'admin']);
 require __DIR__.'/auth.php';

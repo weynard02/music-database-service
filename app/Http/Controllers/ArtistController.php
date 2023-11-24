@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artist;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -25,6 +26,11 @@ class ArtistController extends Controller
         return view('artist.index', compact('artists'));
 
 
+    }
+
+    public function indexAdmin() {
+        $artists = Artist::all()->sortBy('name');
+        return view('admin.artists', compact('artists'));
     }
 
     /**
@@ -52,27 +58,55 @@ class ArtistController extends Controller
         return view('artist.show', compact('artist'));
     }
 
+    public function showAdmin($id) {
+        $artist = Artist::findorfail($id);
+        return view('admin.showArtist', compact('artist'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Artist $artist)
+    public function edit($id)
     {
-        //
+        $artist = Artist::findorfail($id);
+        return view('admin.artistEdit', compact('artist'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Artist $artist)
+    public function update(Request $request, int $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'description' => 'required|max:255'
+        ]);
+
+        $artist = Artist::findorfail($id);
+        $artist->update([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+
+        return redirect('/admin/artists')->with('success', 'Edit Artist Success');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Artist $artist)
+    public function destroy($id)
     {
-        //
+        $artist = Artist::findorfail($id);
+        try {
+            $artist->delete();
+            return redirect('/admin/artists')->with('success', 'Delete successfully!');
+        }
+        catch (QueryException $e) {
+            if($e->errorInfo[1] === 1451) {
+                return redirect()->back()->with('error', 'This Artist has a song records, it cannot be deleted');
+            } else {
+                return redirect()->back()->with('error', 'Something went wrong!');
+            }
+        }
     }
 }
