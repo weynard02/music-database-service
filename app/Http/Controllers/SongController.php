@@ -121,9 +121,9 @@ class SongController extends Controller
     /**
      * Update Favorite
      */
-    public function setFavorite($id) {
+    public function setFavorite(Request $request) {
         $user = Auth::user();
-        $song = Song::findOrFail($id);
+        $song = Song::findOrFail($request->id);
     
         $songUser = SongUser::where('user_id', $user->id)
             ->where('song_id', $song->id)
@@ -138,7 +138,7 @@ class SongController extends Controller
                 'is_favourite' => $value
             ]);
     
-            return redirect()->back()->with('success', 'Update successfully!');
+            return redirect()->back();
         }
     
         // If the record doesn't exist, create a new one
@@ -148,7 +148,7 @@ class SongController extends Controller
             'is_favourite' => true,
         ]);
     
-        return redirect('/songs')->with('success', 'Update successfully!');
+        return redirect('/songs');
     }
     
 

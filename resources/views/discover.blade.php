@@ -20,8 +20,8 @@
                 </div>
             </form>
             @if (session('success'))
-                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400">{{ session('success') }}</div>
-             @endif
+                <div class="p-4 my-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400">{{ session('success') }}</div>
+            @endif
             <div class="grid-cols-2 sm:grid md:grid-cols-4 ">
                 @foreach ($songs as $i)
                 <div
@@ -39,22 +39,22 @@
                     <h6 class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
                         {{ $i->artist->name }}, {{ $i->release_date }}
                     </h6>
-                    
                     <div class="flex flex-row gap-4">
                         <a href="/songs/{{ $i->id }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
                             Listen
                         </a> 
-                        <a href="/songs/fav/{{$i->id}}" class="mt-2 text-red-400 dark:text-white">
+                        @php
+                            $pivot =  $songUser->where('user_id', Auth::user()->id)->where('song_id',$i->id)->first();
+                        @endphp
+                        <button type="button" id="like-{{$i->id}}" class="ajax-button mb-2 transition transform hover:-translate-y-0 hover:-translate-x-0 hover:scale-150 active:scale-125 text-red-400 dark:text-white" data-id={{$i->id}} value="{{ $pivot && $pivot->is_favourite == true ? 1 : 0}}">
                             {{-- Checking if the pivot data exist or not or if it exists, is it favorite or not --}}
-                            @php
-                                $pivot =  $songUser->where('user_id', Auth::user()->id)->where('song_id',$i->id)->first()
-                            @endphp
+                            
                             @if( $pivot && $pivot->is_favourite == true)
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35Z"/></svg>
                             @else
                                 <i data-feather="heart"></i>
                             @endif
-                        </a>
+                        </button>
                     </div>
                     
                     
@@ -62,10 +62,50 @@
                     <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">{{ $i->tags }}</p>
                   </div>
                 </div>
+                
                 @endforeach
                 
             </div>
         </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.ajax-button').on('click', function() {
+                    var id = $(this).data('id');
+
+                    $.ajax({
+                        url: '/songs/fav', // Replace with your route URL
+                        method: 'POST', // or 'GET', depending on your route
+                        data: {
+                            id: id
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            // Handle the success response here
+                            // console.log('AJAX SUCCESS');
+                            const likeButton = document.getElementById('like-'+id);
+                            const likeButtonValue = likeButton.value;
+                            if (likeButtonValue == 1)
+                            {
+                                // console.log("Disliked.");
+                                likeButton.value = 0;
+                                likeButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>';
+                            }
+                            else {
+                                // console.log("Liked!");
+                                likeButton.value = 1;
+                                likeButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35Z"></path></svg>`;
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle errors here
+                            console.error(error);
+                        }
+                    });
+                });
+            });
+        </script>
         <div class="mt-4 flex justify-center">
             {{ $songs->links() }}
         </div>
