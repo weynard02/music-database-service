@@ -37,8 +37,8 @@ class SongController extends Controller
             return view('discover', compact('songs', 'songUser'));  
         }
 
-        $seconds = 10;
-        $songs = Cache::remember('songs', $seconds, function () {
+        $ttl = 60*60;
+        $songs = Cache::remember('songs-page-' . request('page', 1), $ttl, function () {
             return Song::paginate(20);
         });
 
