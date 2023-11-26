@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('song_user', function (Blueprint $table) {
             // $table->id();
-            $table->foreignId('song_id')->constained()->onDelete('cascade')->onUpdate('cascade');;
+            $table->foreignId('song_id')->constrained()->onDelete('cascade')->onUpdate('cascade');;
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('is_favourite')->default(false);
             $table->boolean('voted')->default(false);
