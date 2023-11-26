@@ -28,12 +28,13 @@
                         @endif
                         <div class="p-6">
                             <h5
-                            class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                            class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50 truncate">
                             {{ $loop->index + 1 }}. {{ $i->title }}
                             </h5>
-                            <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                            <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200 truncate">
                                 {{ $i->artist->name }}, {{ $i->release_date }}
                             </p>
+                            <h6 class="mt-4 mb-4 text-base text-neutral-600 dark:text-neutral-200">{{ $i->streams }} streams</h6>
                             <a href="/songs/{{ $i->id }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
                                 Listen
                             </a> 
@@ -58,10 +59,10 @@
                         @endif
                         <div class="p-6">
                             <h5
-                            class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                            class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50 truncate">
                             {{ $i->title }}
                             </h5>
-                            <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                            <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200 truncate">
                                 {{ $i->artist->name }}, {{ $i->release_date }}
                             </p>
                             <a href="/songs/{{ $i->id }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
@@ -88,10 +89,10 @@
                         @endif
                         <div class="p-6">
                             <h5
-                            class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                            class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50 truncate">
                             {{ $i->title }}
                             </h5>
-                            <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                            <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200 truncate">
                                 {{ $i->artist->name }}, {{ $i->release_date }}
                             </p>
                             <a href="/songs/{{ $i->id }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
