@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Genre;
 use App\Models\Song;
+use App\Models\SongUser;
 use Illuminate\Http\Request;
 
 class GenreController extends Controller
@@ -11,19 +12,20 @@ class GenreController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index()
     {
-        $genres = Genre::all();
-        $song = Song::findorfail($id);
-        return view('addgenre', compact('genres', 'song'));
+        $genres = Genre::all()->sortBy('name');
+        return view('genre.index', compact('genres'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        
+        $genres = Genre::all()->sortBy('name');
+        $song = Song::findorfail($id);
+        return view('genre.create', compact('genres', 'song'));
     }
 
     /**
@@ -41,9 +43,11 @@ class GenreController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Genre $genre)
+    public function show($id)
     {
-        //
+        $genre = Genre::findorfail($id);
+        $songUser = SongUser::all();
+        return view('genre.show', compact('genre', 'songUser'));
     }
 
     /**
