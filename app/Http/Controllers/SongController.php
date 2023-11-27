@@ -39,7 +39,7 @@ class SongController extends Controller
 
         $ttl = 60*60;
         $songs = Cache::remember('songs-page-' . request('page', 1), $ttl, function () {
-            return Song::paginate(20);
+            return Song::orderBy('release_date', 'desc')->paginate(20);
         });
 
         $songUser = SongUser::all();

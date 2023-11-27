@@ -52,6 +52,7 @@
                             <source src="{{ asset('storage/songs/'. $song->file_audio_path)}}" type="audio/mpeg">
                         Your browser does not support the audio element.
                         </audio>
+                        <input type="range" id="volume-slider-{{$song->id}}">
                         <progress id="progressBar-{{$song->id}}" value="0" max="100" class="w-full h-4 bg-gray-300 rounded-full overflow-hidden"></progress>
                         
                     </div>
@@ -63,6 +64,11 @@
     <script>
         progressBarUpdate({{ $song->id }});
         var audio = document.getElementById("audio-" + {{$song->id}});
+        var volume = document.getElementById('volume-slider-'+{{$song->id}});
+        volume.addEventListener("change", function(e) {
+            audio.volume = e.currentTarget.value / 100;
+        })
+        
         window.onload = function () {
             audio.play();
             if (audio.paused || audio.duration == 0) {
