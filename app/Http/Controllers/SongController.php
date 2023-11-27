@@ -6,6 +6,7 @@ use App\Models\Artist;
 use App\Models\Playlist;
 use App\Models\Song;
 use App\Models\SongUser;
+use App\Providers\SetFavouriteSong;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -137,7 +138,7 @@ class SongController extends Controller
             ->where('song_id', $song->id)->update([
                 'is_favourite' => $value
             ]);
-    
+            SetFavouriteSong::dispatch($song, $user, $value);
             return redirect()->back();
         }
     
@@ -147,7 +148,9 @@ class SongController extends Controller
             'song_id' => $song->id,
             'is_favourite' => true,
         ]);
-    
+        
+
+        SetFavouriteSong::dispatch($song, $user, 1);
         return redirect('/songs');
     }
     

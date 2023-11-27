@@ -94,6 +94,9 @@ class PlaylistController extends Controller
             $playlistSong = PlaylistSong::where('playlist_id', $id)->get();
             return view('playlist.chart', compact('playlist', 'songs', 'playlistSong'));
         }
+        if ($playlist->type == 'Favourites') {
+            return view('playlist.fav', compact('playlist', 'songs'));
+        }
         return view('playlist.show', compact('playlist', 'songs'));
     }
 

@@ -48,11 +48,7 @@
                         <button id="loop-{{$song->id}}" type="button" onclick="loop({{$song->id}})" class="mx-3 text-purple-700 hover:text-white border border-purple-700 rounded-full hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">
                             <i data-feather="repeat"></i>
                         </button>
-                        @if($nextSong)
-                        <a href="/songs/{{$playlist->id}}/{{$nextSong->id}}" type="button" class="mx-3 text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                            Next
-                        </a>
-                        @endif
+                        
                         
                         <audio id="audio-{{$song->id}}">
                             <source src="{{ asset('storage/songs/'. $song->file_audio_path)}}" type="audio/mpeg">
@@ -60,7 +56,11 @@
                         </audio>
                         <input type="range" id="volume-slider-{{$song->id}}">
                         <progress id="progressBar-{{$song->id}}" value="0" max="100" class="w-full h-4 bg-gray-300 rounded-full overflow-hidden"></progress>
-                        
+                        @if($nextSong)
+                        <a href="/songs/{{$playlist->id}}/{{$nextSong->id}}" type="button" class="mx-3 text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                            Next
+                        </a>
+                        @endif
                     </div>
                 </div>
             </div>
