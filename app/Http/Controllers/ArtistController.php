@@ -19,7 +19,8 @@ class ArtistController extends Controller
             return view("artist.index", compact('artists'));
         }
         
-        $artists = Cache::remember('artists', 10, function() {
+        $ttl = 60*60;
+        $artists = Cache::remember('artists-page-' . request('page', 1), $ttl, function() {
             return Artist::orderBy('name')->paginate(10);
         });
         
