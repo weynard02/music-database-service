@@ -97,6 +97,25 @@ class PlaylistController extends Controller
         return view('playlist.show', compact('playlist', 'songs'));
     }
 
+    public function song($playlistId, $songId) {
+        $playlist = Playlist::findorfail($playlistId);
+        $song = Song::findorfail($songId);
+        $playlistSong = PlaylistSong::where('playlist_id', $playlistId)
+        ->where('song_id', $songId)->first();
+
+        $nowOrder = $playlistSong->order;
+        $nextSong = Song::select('songs.*')
+        ->join('playlist_song', 'songs.id', '=', 'playlist_song.song_id')
+        ->join('playlists', 'playlist_song.playlist_id', '=',  'playlists.id')
+        ->where('playlists.id', $playlistId)
+        ->where('order', '>', $nowOrder)
+        ->first();
+        if(!$playlist->is_public && $playlist->user_id != Auth::user()->id)
+            return redirect()->back();
+        $song->increment('streams');
+        return view('playlist.song', compact('song', 'playlist', 'nextSong'));    
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

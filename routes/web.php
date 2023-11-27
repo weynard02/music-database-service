@@ -48,6 +48,7 @@ Route::get('/playlists/create', [PlaylistController::class, 'create'])->middlewa
 Route::post('/playlists/create', [PlaylistController::class, 'store'])->middleware(['auth', 'verified']);
 Route::post('/playlists/add/{id}', [PlaylistController::class, 'storePivot'])->middleware(['auth', 'verified']);
 Route::get('/playlists/{id}', [PlaylistController::class, 'show'])->middleware(['auth', 'verified']);
+Route::get('/songs/{playlistId}/{songId}', [PlaylistController::class, 'song'])->middleware(['auth', 'verified']);
 Route::delete('/playlists/{id}', [PlaylistController::class, 'destroy'])->middleware(['auth', 'verified']);
 Route::delete('/playlists/{playlistId}/{songId}', [PlaylistController::class, 'destroyPivot'])->middleware(['auth', 'verified']);
 Route::get('/artists', [ArtistController::class,'index'])->middleware(['auth', 'verified'])->name('artist');

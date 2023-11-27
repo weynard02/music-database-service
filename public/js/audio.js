@@ -28,7 +28,7 @@ function replay(id) {
 
 function loop(id) {
     var audio = document.getElementById("audio-" + id);
-    audio.loop = true;
+    audio.loop = !audio.loop;
     var p = document.getElementById("loop-" + id);
     if (
         p.className ==
