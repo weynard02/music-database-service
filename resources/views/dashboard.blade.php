@@ -73,6 +73,7 @@
                     @endforeach
                 </div>
             </div>
+            @if($randomPlaylist)
             <div class="my-5 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="text-3xl p-6 text-gray-900 dark:text-gray-100">
                     {{ $randomPlaylist->name }}
@@ -103,6 +104,7 @@
                     @endforeach
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </x-app-layout>
