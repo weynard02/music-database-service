@@ -31,7 +31,7 @@
                         data-te-ripple-init data-te-ripple-color="light" href="/playlists/create" role="button">Create Playlist</a>
                 </div>
             @endif
-            @if(Auth::user()->plan_id === 1 && count($playlists) == 3)
+            @if(Auth::user()->plan_id === 1 && count($playlists) >= 3)
                 <h3 class="text-red-500">You only limited by 3 playlists because of using Free Plan</h3>
             @else
             <div class="py-5">

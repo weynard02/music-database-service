@@ -68,6 +68,7 @@ class RegisteredUserController extends Controller
         $is_verified = 1; 
         $user = User::findorfail($request->id);
         $user->update([
+            'plan_id' => 2,
             'is_verified' => $is_verified 
         ]);
         
