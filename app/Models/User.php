@@ -11,6 +11,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Modules\Report\Core\Domain\Model\Report;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -60,6 +62,11 @@ class User extends Authenticatable
 
     public function songs(): BelongsToMany
     {
-        return $this->belongsToMany(Song::class)->withPivot('is_favourite', 'voted')->withTimestamps();;
+        return $this->belongsToMany(Song::class)->withPivot('is_favourite')->withTimestamps();;
+    }
+
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Report::class);
     }
 }

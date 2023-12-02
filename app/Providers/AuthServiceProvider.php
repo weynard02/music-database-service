@@ -31,6 +31,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->plan->name == 'premium';
         });
 
+        Gate::define('isFree', function($user) {
+            return $user->plan->name == 'free';
+        });
+
         Gate::define('playlist-delete', function($user, $playlist){
             return $user->id == $playlist->user_id; 
         });

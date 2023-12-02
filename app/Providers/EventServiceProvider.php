@@ -29,14 +29,26 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        parent::boot();
     }
 
     /**
      * Determine if events and listeners should be automatically discovered.
      */
-    public function shouldDiscoverEvents(): bool
+    public function shouldDiscoverEvents()
     {
-        return false;
+        return true;
+    }
+
+    protected function discoverEventsWithin()
+    {
+        $discovered_directories = [];
+        foreach (scandir($path = app_path('Modules')) as $dir) {
+            if (file_exists($folder_path = "{$path}/{$dir}/Core/Application/EventListener")) {
+                $discovered_directories[] = $folder_path;
+            }
+        }
+
+        return array_merge(parent::discoverEventsWithin(), $discovered_directories);
     }
 }

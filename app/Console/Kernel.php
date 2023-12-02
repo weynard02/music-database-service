@@ -16,6 +16,12 @@ class Kernel extends ConsoleKernel
         // $schedule->command('most:streamed')->everyMinute();
         $schedule->command('update:chart')->weekly();
         $schedule->command('app:auto-delete-unverified-user')->hourly();
+
+        foreach (scandir($path = app_path('Modules')) as $dir) {
+            if (file_exists($filepath = "{$path}/{$dir}/scheduling.php")) {
+                require $filepath;
+            }
+        }
     }
 
     /**
@@ -24,6 +30,12 @@ class Kernel extends ConsoleKernel
     protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
+
+        foreach (scandir($path = app_path('Modules')) as $dir) {
+            if (file_exists($folder_path = "{$path}/{$dir}/Presentation/Commands")) {
+                $this->load($folder_path);
+            }
+        }
 
         require base_path('routes/console.php');
     }

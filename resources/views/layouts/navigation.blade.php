@@ -55,6 +55,12 @@
                             {{ __('Admin Menu') }}
                         </x-dropdown-link>
                         @endcan
+
+                        @can('isAdmin')
+                        <x-dropdown-link :href="route('report')">
+                            {{ __('See Reports') }}
+                        </x-dropdown-link>
+                        @endcan
                         
                         @canany(['isAdmin', 'isPremium'])
                         <x-dropdown-link :href="route('create')">
@@ -67,6 +73,10 @@
                             {{ __('Upgrade Premium') }}
                         </x-dropdown-link>
                         @endcan
+
+                        <x-dropdown-link :href="route('report.create')">
+                            {{ __('Add Report') }}
+                        </x-dropdown-link>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

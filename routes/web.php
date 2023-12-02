@@ -72,4 +72,11 @@ Route::get('/admin/artists/{id}', [ArtistController::class, 'showAdmin'])->middl
 Route::get('/admin/artists/edit/{id}', [ArtistController::class, 'edit'])->middleware(['auth', 'verified', 'admin']);
 Route::delete('/admin/artists/delete/{id}', [ArtistController::class, 'destroy'])->middleware(['auth', 'verified', 'admin']);
 Route::put('/admin/artists/{id}', [ArtistController::class, 'update'])->middleware(['auth', 'verified', 'admin']);
+
 require __DIR__.'/auth.php';
+
+foreach (scandir($path = app_path('Modules')) as $dir) {
+    if (file_exists($filepath = "{$path}/{$dir}/Presentation/routes/web.php")) {
+        require $filepath;
+    }
+}
