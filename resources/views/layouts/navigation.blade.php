@@ -61,6 +61,12 @@
                             {{ __('Add Song') }}
                         </x-dropdown-link>
                         @endcan
+
+                        @can('isFree')
+                        <x-dropdown-link :href="route('payment', ['id'=>Auth::user()->id])">
+                            {{ __('Upgrade Premium') }}
+                        </x-dropdown-link>
+                        @endcan
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

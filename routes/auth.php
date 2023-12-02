@@ -11,16 +11,16 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('payment/{id}', [RegisteredUserController::class, 'payment'])
+->name('payment');
+
+Route::post('payment', [RegisteredUserController::class, 'verify']);
+
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
 
     Route::post('register', [RegisteredUserController::class, 'store']);
-
-    Route::get('payment/{id}', [RegisteredUserController::class, 'payment'])
-                ->name('payment');
-
-    Route::post('payment', [RegisteredUserController::class, 'verify']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');

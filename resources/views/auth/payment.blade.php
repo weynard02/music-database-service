@@ -5,7 +5,7 @@
         <!-- Name -->
         <div class="flex flex-col justify-center align-middle">
             <input type="text" value="{{$user->id}}" name="id" hidden>
-            <x-input-label for="name" :value="__('Please pay Rp25.000,00')" class="text-center text-xl"/>
+            <x-input-label for="name" :value="__('Please pay Rp50.000,00')" class="text-center text-xl"/>
             <img src="/images/qris.png" alt="guthib.com" class="h-auto max-w-full rounded-lg">
         </div>
 
