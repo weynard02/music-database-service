@@ -7,7 +7,7 @@
         <form action="/playlists/{{$playlist->id}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('delete')
-            <button type="submit" class="px-3 py-2 text-xs font-medium 
+            <button type="submit" class="mt-1 px-3 py-2 text-xs font-medium 
             text-red-700 hover:text-white border border-red-700 hover:bg-red-800 
             focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                 Delete Playlist
@@ -29,17 +29,13 @@
                         
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $loop->index + 1 }}. {{$i->artist->name}} - {{$i->title}}</h5>
                         
-                        <form action="/playlists/{{$playlist->id}}/{{$i->id}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            @method('delete')
-                            <a href="/songs/{{$playlist->id}}/{{$i->id}}" class="my-6 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Listen</a>
-                            <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
-                            {{-- Checking if the pivot data exist or not or if it exists, is it favorite or not --}}
-                            @php
-                                $pivot =  $playlistSong->where('song_id',$i->id)->first();
-                            @endphp
-                            <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Likes: {{$pivot->points}}</h5>
-                        </form>
+                        <a href="/songs/{{$playlist->id}}/{{$i->id}}" class="my-6 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Listen</a>
+
+                        {{-- Checking if the pivot data exist or not or if it exists, is it favorite or not --}}
+                        @php
+                            $pivot =  $playlistSong->where('song_id',$i->id)->first();
+                        @endphp
+                        <h5 class="my-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Likes: {{$pivot->points}}</h5>
                         
                     </div>
 

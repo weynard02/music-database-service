@@ -21,8 +21,9 @@ class SongController extends Controller
         $popularChart = Song::all()->sortByDesc('streams')->take(10);
         $newSongs = Song::all()->sortByDesc('release_date')->take(10);
         $randomPlaylist = Playlist::where('is_public', '1')->inRandomOrder()->first();
+        $chart = Playlist::where('type', 'Chart')->orderBy('created_at', 'desc')->first();
 
-        return view('dashboard', compact('popularChart', 'newSongs', 'randomPlaylist'));
+        return view('dashboard', compact('popularChart', 'newSongs', 'randomPlaylist', 'chart'));
     }
     
     /**

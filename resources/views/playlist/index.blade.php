@@ -18,6 +18,11 @@
                     <input type="search" name="playlist" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required>
                     <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                 </div>
+                <label class="mt-4 relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" value="1" name="public" class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                    <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Search Public</span>
+                  </label>
             </form>
             @if (session('success'))
                 <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400">{{ session('success') }}</div>
@@ -40,7 +45,7 @@
             @endif
             @foreach($playlists as $i) 
             <a href="/playlists/{{$i->id}}" class="my-5 block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$i->name}} <span class="capitalize text-sm font-normal text-gray-700 dark:text-gray-400">({{$i->is_public ? 'public' : 'private'}} | {{ $i->type }})</span> </h3>
+                <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$i->name}} <span class="capitalize text-sm font-normal text-gray-700 dark:text-gray-400">({{$i->is_public ? 'public' : 'private'}} | {{ $i->type }}) by {{$i->user_id == Auth::user()->id ? 'you' : $i->user->name}}</span> </h3>
                 <h5 class="font-normal text-gray-700 dark:text-gray-400">Click to listen!</h5>
             </a>
             @endforeach
