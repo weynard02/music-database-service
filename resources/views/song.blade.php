@@ -27,14 +27,16 @@
                                 Genre: 
                                 <p class="text-sm text-gray-900 dark:text-white">
                                     @foreach($song->genres as $genre) 
-                                        <span class="capitalize">{{ $genre->name }}</span>, 
+                                        <span class="capitalize">{{ $genre->name }}</span>@if(!$loop->last),@endif 
                                     @endforeach
                                 </p>
                             </h5>
                             @if(Auth::user()->plan->name == 'admin' || Auth::user()->name == $song->artist->name)
-                            <a href="/genres/add/{{$song->id}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                Add Genres
-                            </a>
+                            <div class="flex flex-row">
+                                <a href="/genres/add/{{$song->id}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                    Add Genres
+                                </a>
+                            </div>
                             @endif
                         </div>
                         

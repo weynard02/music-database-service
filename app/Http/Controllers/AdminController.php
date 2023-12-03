@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Artist;
 use App\Models\Song;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -16,9 +18,20 @@ class AdminController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $songs = Song::all();
+        if ($request->search) {
+            $songs = Song::select('songs.*')
+            ->join('artists', 'artists.id', '=', 'songs.artist_id')
+            ->where('tags', 'LIKE', '%'.$request->search.'%')
+            ->orWhere('title', 'LIKE', '%'.$request->search.'%')
+            ->orWhere('artists.name', 'LIKE', '%'.$request->search.'%')
+            ->get();
+
+            return view('admin.index', compact('songs'));  
+        }
+
+        $songs = Song::all()->sortByDesc('release_date');
         return view('admin.index', compact('songs'));
     }
 
@@ -43,13 +56,14 @@ class AdminController extends Controller
             'thumbnail' => 'mimes:jpg,png,jpeg',
             'tags' => 'max:255'
         ]);
+        $currentDate = Carbon::now()->format('Ymd');
 
-        $audioPath = $request->audio->getClientOriginalName();
+        $audioPath =  $currentDate . '_' . $request->audio->getClientOriginalName();
         $request->audio->storeAs('public/songs', $audioPath);
 
         $thumbnailPath = null;
         if ($request->thumbnail) {
-            $thumbnailPath = $request->thumbnail->getClientOriginalName();
+            $thumbnailPath = $currentDate . '_' . $request->thumbnail->getClientOriginalName();
             $request->thumbnail->storeAs('public/thumbnails', $thumbnailPath);
         }
 
@@ -107,18 +121,20 @@ class AdminController extends Controller
             'tags' => 'max:255'
         ]);
 
+        $currentDate = Carbon::now()->format('Ymd');
+
         $song = Song::findorfail($id);
         $audioPath = $song->file_audio_path;
         if ($request->audio) {
             Storage::delete('public/songs/'.$song->file_audio_path);
-            $audioPath = $request->audio->getClientOriginalName();
+            $audioPath = $currentDate . '_' .  $request->audio->getClientOriginalName();
             $request->audio->storeAs('public/songs', $audioPath);
         }
         
         $thumbnailPath = $song->thumbnail_path;
         if ($request->thumbnail) {
             Storage::delete('public/thumbnails/'.$song->thumbnail_path);
-            $thumbnailPath = $request->thumbnail->getClientOriginalName();
+            $thumbnailPath = $currentDate . '_' . $request->thumbnail->getClientOriginalName();
             $request->thumbnail->storeAs('public/thumbnails', $thumbnailPath);
         }
 

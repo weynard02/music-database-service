@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
 
 class SongController extends Controller
 {
@@ -70,12 +72,14 @@ class SongController extends Controller
             'tags' => 'max:255'
         ]);
 
-        $audioPath = $request->audio->getClientOriginalName();
+        $currentDate = Carbon::now()->format('Ymd');
+
+        $audioPath = $currentDate . '_' . $request->audio->getClientOriginalName();
         $request->audio->storeAs('public/songs', $audioPath);
 
         $thumbnailPath = null;
         if ($request->thumbnail) {
-            $thumbnailPath = $request->thumbnail->getClientOriginalName();
+            $thumbnailPath = $currentDate . '_' . $request->thumbnail->getClientOriginalName();
             $request->thumbnail->storeAs('public/thumbnails', $thumbnailPath);
         }
 
@@ -168,8 +172,12 @@ class SongController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Song $song)
+    public function destroy($id)
     {
-        //
+        $song = Song::findorfail($id);
+        Storage::delete('public/songs/'.$song->file_audio_path);
+        Storage::delete('public/thumbnails/'.$song->thumbnail_path);
+        $song->delete();
+        return redirect('/songs')->with('success', 'Delete successfully!');
     }
 }

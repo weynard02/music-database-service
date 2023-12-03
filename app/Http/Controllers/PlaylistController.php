@@ -113,10 +113,19 @@ class PlaylistController extends Controller
         ->where('playlists.id', $playlistId)
         ->where('order', '>', $nowOrder)
         ->first();
+
+        $prevSong = Song::select('songs.*')
+        ->join('playlist_song', 'songs.id', '=', 'playlist_song.song_id')
+        ->join('playlists', 'playlist_song.playlist_id', '=',  'playlists.id')
+        ->where('playlists.id', $playlistId)
+        ->where('order', '<', $nowOrder)
+        ->orderBy('order', 'desc')
+        ->first();
+
         if(!$playlist->is_public && $playlist->user_id != Auth::user()->id)
             return redirect()->back();
         $song->increment('streams');
-        return view('playlist.song', compact('song', 'playlist', 'nextSong'));    
+        return view('playlist.song', compact('song', 'playlist', 'nextSong', 'prevSong'));    
     }
 
     /**

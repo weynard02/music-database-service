@@ -40,7 +40,7 @@
             @endif
             @foreach($playlists as $i) 
             <a href="/playlists/{{$i->id}}" class="my-5 block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$i->name}} <span class="text-sm font-normal text-gray-700 dark:text-gray-400">({{$i->is_public ? 'public' : 'private'}})</span> </h3>
+                <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$i->name}} <span class="capitalize text-sm font-normal text-gray-700 dark:text-gray-400">({{$i->is_public ? 'public' : 'private'}} | {{ $i->type }})</span> </h3>
                 <h5 class="font-normal text-gray-700 dark:text-gray-400">Click to listen!</h5>
             </a>
             @endforeach

@@ -7,7 +7,7 @@
         <form action="/playlists/{{$playlist->id}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('delete')
-            <button type="submit" class="px-3 py-2 text-xs font-medium 
+            <button type="submit" class="mt-1 px-3 py-2 text-xs font-medium 
             text-red-700 hover:text-white border border-red-700 hover:bg-red-800 
             focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                 Delete Playlist

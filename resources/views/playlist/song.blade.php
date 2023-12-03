@@ -27,7 +27,7 @@
                                 Genre: 
                                 <p class="text-sm text-gray-900 dark:text-white">
                                     @foreach($song->genres as $genre) 
-                                        <span class="capitalize">{{ $genre->name }}</span>, 
+                                        <span class="capitalize">{{ $genre->name }}</span>@if(!$loop->last),@endif  
                                     @endforeach
                                 </p>
                             </h5>
@@ -56,6 +56,11 @@
                         </audio>
                         <input type="range" id="volume-slider-{{$song->id}}">
                         <progress id="progressBar-{{$song->id}}" value="0" max="100" class="w-full h-4 bg-gray-300 rounded-full overflow-hidden"></progress>
+                        @if($prevSong)
+                        <a href="/songs/{{$playlist->id}}/{{$prevSong->id}}" type="button" class="mx-3 text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                            Prev
+                        </a>
+                        @endif
                         @if($nextSong)
                         <a href="/songs/{{$playlist->id}}/{{$nextSong->id}}" type="button" class="mx-3 text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                             Next
