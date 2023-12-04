@@ -12,8 +12,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
-        // $schedule->command('most:streamed')->everyMinute();
         $schedule->command('update:chart')->weekly();
         $schedule->command('app:auto-delete-unverified-user')->hourly();
 
