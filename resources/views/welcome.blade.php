@@ -43,5 +43,72 @@
           <!-- Jumbotron -->
           
         </div>
+        
+
+        <div class="p-4 bg-gray-100 dark:bg-lighter dark:bg-gray-900">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 ">
+                                Features
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Free
+                            </th>
+                            <th scope="col" class="px-6 py-3 ">
+                                Premium
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Playlists
+                            </th>
+                            <td class="px-6 py-4">
+                                Limited to 3
+                            </td>
+                            <td class="px-6 py-4 ">
+                                Unlimited
+                            </td>
+                        </tr>
+                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Favourite Playlist
+                            </th>
+                            <td class="px-6 py-4">
+                                No
+                            </td>
+                            <td class="px-6 py-4 ">
+                                Yes
+                            </td>
+                        </tr>
+                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Add Song
+                            </th>
+                            <td class="px-6 py-4">
+                                No
+                            </td>
+                            <td class="px-6 py-4 ">
+                                Yes
+                            </td>
+                        </tr>
+                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Searching and play Song
+                            </th>
+                            <td class="px-6 py-4">
+                                Yes
+                            </td>
+                            <td class="px-6 py-4 ">
+                                Yes
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </body>
 </html>

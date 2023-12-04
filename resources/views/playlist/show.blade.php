@@ -41,6 +41,7 @@
                     </div>
 
                     @endforeach
+                    @canany(['isAdmin', 'playlist-delete'], $playlist)
                     <form action="/playlists/add/{{$playlist->id}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="relative z-0 w-full mb-6 group" x-data="{ songs: [] }">
@@ -64,6 +65,7 @@
                         @enderror
                         <button type="submit" id="submitAdd" class="invisible">Submit</button>
                     </form>
+                    @endcanany
                     <a href="/playlists" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Back</a>
                 </div>
             </div>

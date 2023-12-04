@@ -6,6 +6,8 @@ use App\Models\Genre;
 use App\Models\Song;
 use App\Models\SongUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class GenreController extends Controller
 {
@@ -25,6 +27,9 @@ class GenreController extends Controller
     {
         $genres = Genre::all()->sortBy('name');
         $song = Song::findorfail($id);
+        if (!(Gate::allows('isAdmin') || Auth::user()->name == $song->artist->name)) 
+            return redirect('/dashboard');
+
         return view('genre.create', compact('genres', 'song'));
     }
 
@@ -34,6 +39,9 @@ class GenreController extends Controller
     public function store(Request $request, $id)
     {
         $song = Song::findorfail($id);
+        if (!(Gate::allows('isAdmin') || Auth::user()->name == $song->artist->name)) 
+            return redirect('/dashboard');
+
         $selectedGenres = $request->input('genres', []);
         $song->genres()->sync($selectedGenres);
         $path = '/songs/' . $id;
