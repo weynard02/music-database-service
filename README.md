@@ -12,7 +12,7 @@
 | Alexander Weynard Samsico | 5025211014 |
 | Akhmad Mustofa Solikin    | 5025211230 |
 
-## Topik FP: Music Streaming Service
+## Topik FP: Music Streaming Service (SpotInFly)
 
 How to use:
 
@@ -30,3 +30,4 @@ php artisan storage:link
 ```
 
 6. Enjoy!
+7. For schedule and queue, do `php artisan schedule:work` and `php artisan queue:work`
