@@ -19,19 +19,21 @@ class PlaylistController extends Controller
      */
     public function index(Request $request)
     {
+        $search = null;
         if ($request->playlist) {
+            $search = 1;
             if ($request->public) {
                 $playlists = Playlist::where("name", "LIKE", '%'. $request->playlist .'%')
                 ->where('is_public', 1)
                 ->orderBy("created_at","desc")->paginate(10);
-                return view('playlist.index', compact('playlists'));
+                return view('playlist.index', compact('playlists', 'search'));
             }
             $playlists = Playlist::where("name", "LIKE", '%'. $request->playlist .'%')
             ->where("user_id", auth()->user()->id)->orderBy("created_at","desc")->paginate(10);
-            return view('playlist.index', compact('playlists'));  
+            return view('playlist.index', compact('playlists', 'search'));  
         }
         $playlists = Playlist::where("user_id", auth()->user()->id)->orderBy("created_at","desc")->paginate(10);
-        return view('playlist.index', compact('playlists'));    
+        return view('playlist.index', compact('playlists', 'search'));    
     }
 
     /**

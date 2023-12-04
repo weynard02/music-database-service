@@ -38,7 +38,7 @@
             @endif
             @if(Auth::user()->plan_id === 1 && count($playlists) >= 3)
                 <h3 class="text-red-500">You only limited by 3 playlists because of using Free Plan</h3>
-            @else
+            @elseif(!$search)
             <div class="py-5">
                 <a href="/playlists/create" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add Playlist</a>
             </div>
