@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Song;
+use App\Models\Artist;
 use App\Observers\SongObserver;
+use App\Observers\ArtistObserver;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -24,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Song::observe(SongObserver::class);
+        Artist::observe(ArtistObserver::class);
 
         // Register view namespaces
         foreach (scandir($path = app_path('Modules')) as $moduleDir) {
