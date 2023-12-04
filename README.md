@@ -8,20 +8,25 @@
 </p>
 
 | Nama                      | NRP        |
-|---------------------------|------------|
+| ------------------------- | ---------- |
 | Alexander Weynard Samsico | 5025211014 |
 | Akhmad Mustofa Solikin    | 5025211230 |
 
 ## Topik FP: Music Streaming Service
 
 How to use:
-1. Prepare database (follow .env)
-2. Do the migrate
-`php artisan migrate`
-4. Serve on localhost
+
+1. Prepare database (follow .env.example)
+2. Do `composer install` and `npm install`
+3. Do the migrate
+   `php artisan migrate --seed`
+4. Create the key `php artisan key:generate`
+5. Serve on localhost
+
 ```
 php artisan serve
-php artisan storage:link //if needed
-```  
-4. Add Song
-5. Submit and go back to see the result!
+npm run dev
+php artisan storage:link
+```
+
+6. Enjoy!
