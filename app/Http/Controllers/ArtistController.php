@@ -80,7 +80,7 @@ class ArtistController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'description' => 'required|max:500'
+            'description' => 'required|max:1024'
         ]);
 
         $artist = Artist::findorfail($id);
