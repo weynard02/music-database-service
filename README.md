@@ -14,6 +14,10 @@
 
 ## Topik FP: Music Streaming Service (SpotInFly)
 
+### Video Demo:
+
+https://youtu.be/RWq846hAc8c?si=ZUcljS8vrqgAj8-z4
+
 How to use:
 
 1. Prepare database (follow .env.example)
