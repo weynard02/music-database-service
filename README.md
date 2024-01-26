@@ -7,13 +7,6 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-| Nama                      | NRP        |
-| ------------------------- | ---------- |
-| Alexander Weynard Samsico | 5025211014 |
-| Akhmad Mustofa Solikin    | 5025211230 |
-
-## Topik FP: Music Streaming Service (SpotInFly)
-
 ### Video Demo:
 
 https://youtu.be/RWq846hAc8c?si=ZUcljS8vrqgAj8-z4
